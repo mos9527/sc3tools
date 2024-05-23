@@ -24,8 +24,11 @@ jobs:
       - name : Get Version
         id   : get_version
         run  : |        
-          version=$(echo "${{ github.event.head_commit.message }}" | awk 'NR==1' | awk '{print $2}')
-          echo "::set-output name=version::$version"
+          $message = "${{ github.event.head_commit.message }}"
+          $lines = $message.Split([Environment]::NewLine)
+          $version = $lines[0].Split()[1]
+          
+          Write-Output "::set-output name=version::$version"
 
       - name: Create Release
         id: create_release
