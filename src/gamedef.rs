@@ -65,7 +65,7 @@ lazy_static! {
             "Steins;Gate 0 (Simplified Chinese)",
             "sg0zhs",
             &["sg0zhs", "steinsgate0zhs"],
-            None,
+            Some('\u{E12F}'..='\u{E2AF}'),
             vec!['\'']
         ),        
         GameDef::new(
