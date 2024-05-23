@@ -65,7 +65,7 @@ lazy_static! {
             "Steins;Gate 0 (Simplified Chinese)",
             "sg0zhs",
             &["sg0zhs", "steinsgate0zhs"],
-            Some('\u{E12F}'..='\u{E2AF}'),
+            None,
             vec!['\'']
         ),        
         GameDef::new(
@@ -107,17 +107,18 @@ impl GameDef {
 
         let _charset: Cow<[u8]> =
             ResourceDir::get(&file_path(resource_dir, "charset.utf8")).unwrap();
-        let _charset: Vec<char> = std::str::from_utf8(_charset.as_ref())
-            .unwrap()
-            .chars()
-            .collect();
+        let _charset = std::str::from_utf8(_charset.as_ref());
+        let _charset = _charset.as_ref().expect("screw rust man").replace("\r",""); // Or save the file with LF line endings
+        let _charset: Vec<char> = _charset
+            .chars()            
+            .collect();                            
         let mut charset = Vec::<char>::new();
         {
             let mut i = 0 as usize;
             let mut j = 0 as usize;
             while j < _charset.len() {
                 let mut nl = 0 as usize;
-                while j < _charset.len() && _charset[j] == '\n' {
+                while j < _charset.len() && _charset[j] == '\n' {                    
                     i = (i + 64 - 1) & !(64 - 1); // align upward to 64
                     i += nl;
                     j += 1;

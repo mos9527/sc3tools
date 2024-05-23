@@ -201,6 +201,7 @@ pub fn decode_char<'a>(
         .get(i)
         .cloned()
         .ok_or_else(|| EncodingError::IllegalCharCode(code))?;
+    if (ch == '\0') { println!("Unmapped character at codepoint {}", i); }
     if let '\u{e000}'..='\u{f8ff}' = ch {
         // Private Use Area
         compound_map
