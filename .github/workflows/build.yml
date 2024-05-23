@@ -17,8 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Script
-        run: .\script.ps1
+      - name: Run Build Script
+        run: .\build.ps1
         shell: powershell
 
       - name : Get Version
