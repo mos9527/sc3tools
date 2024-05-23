@@ -10,6 +10,8 @@ use nom::{
 };
 use rust_embed::RustEmbed;
 use std::{borrow::Cow, collections::HashMap, ops::RangeInclusive};
+use std::fs::File;
+use std::io::Write;
 
 #[derive(RustEmbed)]
 #[folder = "resources/"]
@@ -59,6 +61,14 @@ lazy_static! {
             vec!['\'']
         ),
         GameDef::new(
+            Game::SteinsGate0,
+            "Steins;Gate 0 (Simplified Chinese)",
+            "sg0zhs",
+            &["sg0zhs", "steinsgate0zhs"],
+            Some('\u{E12F}'..='\u{E2AF}'),
+            vec!['\'']
+        ),        
+        GameDef::new(
             Game::RoboticsNotesDash,
             "Robotics;Notes DaSH",
             "rnd",
@@ -95,12 +105,29 @@ impl GameDef {
             format!("{}/{}", resource_dir, name)
         }
 
-        let charset: Cow<[u8]> =
+        let _charset: Cow<[u8]> =
             ResourceDir::get(&file_path(resource_dir, "charset.utf8")).unwrap();
-        let charset: Vec<char> = std::str::from_utf8(charset.as_ref())
+        let _charset: Vec<char> = std::str::from_utf8(_charset.as_ref())
             .unwrap()
             .chars()
             .collect();
+        let mut charset = Vec::<char>::new();
+        {
+            let mut i = 0 as usize;
+            let mut j = 0 as usize;
+            while j < _charset.len() {
+                let mut nl = 0 as usize;
+                while j < _charset.len() && _charset[j] == '\n' {
+                    i = (i + 64 - 1) & !(64 - 1); // align upward to 64
+                    i += nl;
+                    j += 1;
+                    nl = 1;
+                }
+                charset.resize(i + 1, '\0');
+                if (j < _charset.len()) { charset[i] = _charset[j]; }
+                i += 1; j += 1;
+            }
+        }
         let compound_chars: Cow<[u8]> =
             ResourceDir::get(&file_path(resource_dir, "compound_chars.map")).unwrap();
         let compound_chars = std::str::from_utf8(compound_chars.as_ref()).unwrap();
