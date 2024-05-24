@@ -43,8 +43,8 @@
             },
             "args": [
                 "replace-text",
-                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\0x66*.scx",
-                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\txt\\0x66*.txt",
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\*.scx",
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\txt\\*.txt",
                 "sg0zhs"
             ],
             "cwd": "${workspaceFolder}"
