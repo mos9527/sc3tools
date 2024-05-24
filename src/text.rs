@@ -201,7 +201,9 @@ pub fn decode_char<'a>(
         .get(i)
         .cloned()
         .ok_or_else(|| EncodingError::IllegalCharCode(code))?;
-    if (ch == '\0') { println!("Unmapped character at codepoint {}", i); }
+    if (ch == '\0') { 
+        println!("Unmapped character at codepoint {}", i);
+    }
     if let '\u{e000}'..='\u{f8ff}' = ch {
         // Private Use Area
         compound_map
@@ -244,7 +246,7 @@ impl fmt::Display for EncodingError {
                 write!(f, "illegal character code ({:#X})", code)
             }
             EncodingError::CharNotInCharset(ch) => {
-                write!(f, "character '{}' is not present in the charset", ch)
+                write!(f, "character '{}' is not present in the charset", ch.escape_unicode())
             }
             EncodingError::PuaCharNotMapped(code, ch) => write!(
                 f,

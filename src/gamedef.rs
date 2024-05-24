@@ -57,7 +57,7 @@ lazy_static! {
             "Steins;Gate 0",
             "sg0",
             &["sg0", "steinsgate0"],
-            Some('\u{E12F}'..='\u{E2AF}'),
+            None,
             vec!['\'']
         ),
         GameDef::new(
@@ -125,7 +125,12 @@ impl GameDef {
                     nl = 1;
                 }
                 charset.resize(i + 1, '\0');
-                if (j < _charset.len()) { charset[i] = _charset[j]; }
+                if (j < _charset.len()) {
+                    charset[i] = _charset[j];
+                    if (i != 0 && charset[i] == ' ') {
+                        charset[i] = '\0';
+                    }
+                }
                 i += 1; j += 1;
             }
         }

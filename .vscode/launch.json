@@ -7,7 +7,7 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'sc3tools'",
+            "name": "Text extract test",
             "cargo": {
                 "args": [
                     "build",
@@ -21,11 +21,34 @@
             },
             "args": [
                 "extract-text",
-                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\0x5a_SG0_B01_25.scx",
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\*.scx",
                 "sg0zhs"
             ],
             "cwd": "${workspaceFolder}"
         },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Text replace test",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=sc3tools",
+                    "--package=sc3tools"
+                ],
+                "filter": {
+                    "name": "sc3tools",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "replace-text",
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\0x66*.scx",
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\txt\\0x66*.txt",
+                "sg0zhs"
+            ],
+            "cwd": "${workspaceFolder}"
+        },        
         {
             "type": "lldb",
             "request": "launch",
