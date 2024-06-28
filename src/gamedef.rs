@@ -37,6 +37,14 @@ lazy_static! {
             vec!['\'', '-', '[', ']', '(', ')']
         ),
         GameDef::new(
+            Game::SteinsGate0,
+            "Steins;Gate Steam (Simplified Chinese)",
+            "sghdzhs",
+            &["sghdzhs", "steinsgatehdzhs"],
+            Some('\u{E12F}'..='\u{E2AF}'),
+            vec!['\'']
+        ),              
+        GameDef::new(
             Game::RoboticsNotes,
             "Robotics;Notes",
             "rn",

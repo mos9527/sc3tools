@@ -21,8 +21,8 @@
             },
             "args": [
                 "extract-text",
-                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE 0\\USRDIR\\script\\*.scx",
-                "sg0zhs"
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\STEINS;GATE\\USRDIR\\script\\*.SCX",
+                "sghdzhs"
             ],
             "cwd": "${workspaceFolder}"
         },
